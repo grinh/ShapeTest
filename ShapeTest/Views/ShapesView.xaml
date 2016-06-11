@@ -41,8 +41,8 @@
                 <ColumnDefinition Width="8"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddTriangleCommand}"/>
-            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveTriangleCommand}"/>
+            <Button Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddShapeCommand}"/>
+            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveShapeCommand}"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
