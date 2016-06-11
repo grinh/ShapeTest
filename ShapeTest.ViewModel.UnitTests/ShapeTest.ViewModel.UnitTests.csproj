@@ -76,6 +76,10 @@
       <HintPath>..\packages\MvvmCross.Core.4.1.6\lib\net45\MvvmCross.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SubmissionService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SubmissionService.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -95,6 +99,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MockMvxViewDispatcher.cs" />
+    <Compile Include="MvvmCrossTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapesViewModelTests.cs" />
     <Compile Include="TriangleListViewModelTests.cs" />
