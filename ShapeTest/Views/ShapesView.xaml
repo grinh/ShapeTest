@@ -9,6 +9,7 @@
              xmlns:model="clr-namespace:ShapeTest.Business.Entities;assembly=ShapeTest.Business"
              xmlns:templateSelectors="clr-namespace:ShapeTest.Wpf.TemplateSelectors"
              xmlns:controls="clr-namespace:ShapeTest.Wpf.Controls"
+             xmlns:converters="clr-namespace:ShapeTest.Wpf.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <views:MvxWpfView.Resources>
@@ -18,7 +19,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <templateSelectors:ShapeContentTemplateSelector x:Key="ShapeContentTemplateSelector" CircleTemplate="{StaticResource CircleContentTemplate}" RectangleTemplate="{StaticResource RectangleContentTemplate}" TriangleTemplate="{StaticResource TriangleContentTemplate}" SquareTemplate="{StaticResource SquareContentTemplate}" />
-
+            <converters:SubmissionResultToVisibilityConverter x:Key="SubmissionResultToVisibilityConverter" />
         </ResourceDictionary>
     </views:MvxWpfView.Resources>
     <Grid>
@@ -62,6 +63,9 @@
 
             <controls:ProgressRingControl Grid.Column="2" Message="Sending data..." IsActive="{Binding SubmissionInProgress}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="4,0,0,4" />
 
+            <TextBlock Grid.Column="2" Text="Error! Data not submited!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}, ConverterParameter='invert'}" />
+            <TextBlock Grid.Column="2" Text="Data submited successfully!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="DarkGreen" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}}" />
+            
             <Button Margin="4"  Grid.Column="2" Grid.Row="1" Content="Submit Total Area" Command="{Binding SubmitAreaCommand}"/>
         </Grid>
     </Grid>

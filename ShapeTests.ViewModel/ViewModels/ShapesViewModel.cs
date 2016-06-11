@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 using ShapeTest.Business.Entities;
+using ShapeTest.Business.Enums;
 using ShapeTest.Business.Repositories;
 using ShapeTest.Business.Services;
 using ShapeTests.ViewModel.ViewModels;
@@ -17,7 +18,11 @@ namespace ShapeTests.ViewModel
         private readonly IShapesRepository _ShapesRepo;
         private readonly IComputeAreaService _ComputeAreaService;
         private readonly ISubmissionService _SubmissionService;
+
+		
+
 	    private bool _SubmissionInProgress;
+	    private SubmissionResult _SubmissionResult;
 
         private ObservableCollection<IShape> _Shapes;
 
@@ -101,7 +106,14 @@ namespace ShapeTests.ViewModel
 		    {
 			    SetAndRaisePropertyChanged(ref _SubmissionInProgress, value);
 		    }
-		} 
+		}
+
+	    public SubmissionResult SubmissionResult
+	    {
+		    get { return _SubmissionResult; }
+		    set { SetAndRaisePropertyChanged(ref _SubmissionResult, value); }
+	    }
+
 	    public override void Start()
         {
            Shapes = new ObservableCollection<IShape>(_ShapesRepo.GetShapes());
@@ -142,6 +154,7 @@ namespace ShapeTests.ViewModel
 		        return;
 	        }
 
+			SubmissionResult = SubmissionResult.None;
 	        SubmissionInProgress = true;
 			SubmitAreaCommand.RaiseCanExecuteChanged();
 
@@ -150,10 +163,12 @@ namespace ShapeTests.ViewModel
 		        try
 		        {
 					_SubmissionService.SubmitTotalArea(TotalArea);
+					SubmissionResult = SubmissionResult.Success;
+
 				}
 		        catch (Exception)
 		        {
-					//TODO
+					SubmissionResult = SubmissionResult.Failure;
 		        }
 		        
 		        SubmissionInProgress = false;

@@ -89,6 +89,7 @@
     <Compile Include="Controls\ProgressRingControl.xaml.cs">
       <DependentUpon>ProgressRingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SubmissionResultToVisibilityConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Popup\PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
