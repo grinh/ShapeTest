@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="ShapeApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AddTriangleViewModel.cs" />
+    <Compile Include="ViewModels\AddShapeViewModel.cs" />
     <Compile Include="ViewModels\IPopupViewModel.cs" />
     <Compile Include="ViewModels\ShapesViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />

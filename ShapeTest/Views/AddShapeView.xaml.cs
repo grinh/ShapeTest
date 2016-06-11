@@ -2,16 +2,16 @@
 
 namespace ShapeTest.Wpf.Views
 {
-    public partial class AddTriangleView
+    public partial class AddShapeView
     {
-        public AddTriangleView()
+        public AddShapeView()
         {
             InitializeComponent();
         }
 
-        public new AddTriangleViewModel ViewModel
+        public new AddShapeViewModel ViewModel
         {
-            get { return (AddTriangleViewModel)base.ViewModel; }
+            get { return (AddShapeViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
     }

@@ -1,22 +1,27 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using MvvmCross.Core.ViewModels;
 
 namespace ShapeTests.ViewModel.ViewModels
 {
     using ShapeTest.Business.Entities;
     using ShapeTest.Business.Repositories;
 
-    public class AddTriangleViewModel : ViewModel, IPopupViewModel
+    public class AddShapeViewModel : ViewModel, IPopupViewModel
     {
         private readonly IShapesRepository _ShapeRepo;
 
         private int _OwnerId;
 
-        private MvxCommand _AddTriangleCommand;
-        private MvxCommand _CancelCommand;
+        private IMvxCommand _AddTriangleCommand;
+        private IMvxCommand _CancelCommand;
 
         public bool IsModal => true;
 
         public bool TopMost => true;
+
+	    public List<Type> ShapeTypes { get; set; }
+
 
         public int OwnerId
         {
@@ -24,36 +29,39 @@ namespace ShapeTests.ViewModel.ViewModels
             set { SetAndRaisePropertyChanged(ref _OwnerId, value); }
         }
 
-        public MvxCommand AddTriangleCommand
+        public IMvxCommand AddTriangleCommand
         {
             get { return _AddTriangleCommand; }
             set { SetAndRaisePropertyChanged(ref _AddTriangleCommand, value);}
         }
 
-        public MvxCommand CancelCommand
+        public IMvxCommand CancelCommand
         {
             get { return _CancelCommand; }
             set { SetAndRaisePropertyChanged(ref _CancelCommand, value);}
         }
 
 
-        public AddTriangleViewModel(IShapesRepository shapeRepo)
+        public AddShapeViewModel(IShapesRepository shapeRepo)
         {
-            _ShapeRepo = shapeRepo;
-            AddTriangleCommand = new MvxCommand(AddTriangle);
+			ShapeTypes = new List<Type> { typeof(Triangle), typeof(Circle), typeof(Square), typeof(Rectangle) };
+			_ShapeRepo = shapeRepo;
+	        AddTriangleCommand = new MvxCommand<Type>(AddShape);
             CancelCommand = new MvxCommand(Cancel);
         }
 
-        public void AddTriangle()
-        {
-            Triangle triangle = new Triangle
-            {
-                Name = "New Triangle"                            
-            };
+	    private void AddShape(Type shape)
+	    {
+			IShape newShape = Activator.CreateInstance(shape) as IShape;
 
-            _ShapeRepo.AddShape(triangle);
-            Close(this);
-        }
+		    if (newShape != null)
+		    {
+			    newShape.Name = "New Shape";
+				_ShapeRepo.AddShape(newShape);
+		    }
+
+			Close(this);
+		}
 
         public void Cancel()
         {

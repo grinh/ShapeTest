@@ -93,7 +93,7 @@ namespace ShapeTests.ViewModel
 
         public void AddTriangle()
         {
-            ShowViewModel<AddTriangleViewModel>();
+            ShowViewModel<AddShapeViewModel>();
         }
 
         public void OnShapeAdded(object sender, ShapeEventArgs args)
