@@ -14,13 +14,13 @@ namespace ShapeTest.Business.UnitTest
         private const double ExpectedPrecision = 0.001;
 
         private MockRepository _MockRepository;
-        private Mock<ITrianglesRepository> _MockTrianglesRepository;
+        private Mock<IShapesRepository> _MockTrianglesRepository;
       
         [TestInitialize]
         public void Setup()
         {
             _MockRepository = new MockRepository(MockBehavior.Strict);
-            _MockTrianglesRepository = _MockRepository.Create<ITrianglesRepository>();
+            _MockTrianglesRepository = _MockRepository.Create<IShapesRepository>();
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace ShapeTest.Business.UnitTest
             // Arrange
             const double expectedResult = 13;
 
-            List<Triangle> triangles = new List<Triangle>
+            IList<IShape> triangles = new List<IShape>
             {
                 new Triangle
                     {
@@ -43,7 +43,7 @@ namespace ShapeTest.Business.UnitTest
                     }                                   
             };
 
-            _MockTrianglesRepository.Setup(m => m.GetTriangles()).Returns(triangles);
+            _MockTrianglesRepository.Setup(m => m.GetShapes()).Returns(triangles);
 
             ComputeAreaService computeAreaService = new ComputeAreaService(_MockTrianglesRepository.Object);
 

@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"
              xmlns:viewModels="clr-namespace:ShapeTests.ViewModel.ViewModels;assembly=ShapeTests.ViewModel"
+             xmlns:model="clr-namespace:ShapeTest.Business.Entities;assembly=ShapeTest.Business"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <views:MvxWpfView.Resources>
-        <DataTemplate x:Key ="TriangleListItemTemplate" DataType="{x:Type viewModels:TriangleListItemViewModel}">
+        <DataTemplate x:Key ="TriangleListItemTemplate" DataType="{x:Type model:IShape}">
             <Grid>
-                <TextBlock x:Name="TriangleName" Text="{Binding TriangleName}" />
+                <TextBlock x:Name="TriangleName" Text="{Binding Name}" />
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="TriangleContentTemplate" DataType="{x:Type viewModels:TriangleViewModel}">
+        <DataTemplate x:Key="TriangleContentTemplate" DataType="{x:Type model:IShape}">
             <Grid HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -51,8 +52,8 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TriangleListItems}" SelectedItem="{Binding SelectedTriangleListItemViewModel}" ItemTemplate="{StaticResource TriangleListItemTemplate}"/>
-        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedTriangleContentViewModel}" ContentTemplate="{StaticResource TriangleContentTemplate}"/>
+        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource TriangleListItemTemplate}"/>
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedShape}" ContentTemplate="{StaticResource TriangleContentTemplate}"/>
         
         <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>

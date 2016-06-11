@@ -152,6 +152,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShapeTest.Business\ShapeTest.Business.csproj">
+      <Project>{432C0100-85D2-414C-9C2C-51D814768DB5}</Project>
+      <Name>ShapeTest.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShapeTests.ViewModel\ShapeTests.ViewModel.csproj">
       <Project>{fc008b42-d59a-41b6-b57a-49eeaf1cc017}</Project>
       <Name>ShapeTests.ViewModel</Name>

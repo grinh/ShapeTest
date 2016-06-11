@@ -3,13 +3,43 @@
     using System;
     using System.Collections.Generic;
 
-    public class Triangle
+	public interface IShape
+	{
+		string Name
+		{
+			get; 
+			set;
+		}
+
+		double CalculateArea();
+	}
+
+	public class ObservableEntity
+	{
+		public void OnEntityChanged()
+		{
+			EntityChangedEventHandler handler = EntityChanged;
+			handler?.Invoke(this, EventArgs.Empty);
+		}
+
+		public void SetAndRaiseIfChanged<T>(ref T backingField, T newValue)
+		{
+			if (!EqualityComparer<T>.Default.Equals(backingField, newValue))
+			{
+				backingField = newValue;
+				OnEntityChanged();
+			}
+		}
+
+		public event EntityChangedEventHandler EntityChanged;
+	}
+
+
+    public class Triangle: ObservableEntity, IShape
     {
         private string _Name;
         private double _Base;
         private double _Height;
-
-        public event EntityChangedEventHandler EntityChanged;
 
         public string Name
         {
@@ -17,7 +47,12 @@
             set { SetAndRaiseIfChanged(ref _Name, value); }
         }
 
-        public double Base
+	    public double CalculateArea()
+	    {
+		    return 0.5*Base*Height;
+	    }
+
+	    public double Base
         {
             get { return _Base; }
             set { SetAndRaiseIfChanged(ref _Base, value); }
@@ -27,21 +62,6 @@
         {
             get { return _Height;}
             set { SetAndRaiseIfChanged(ref _Height, value); }
-        }
-
-        public void OnEntityChanged()
-        {
-            EntityChangedEventHandler handler = EntityChanged;
-            handler?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void SetAndRaiseIfChanged<T>(ref T backingField, T newValue)
-        {
-            if (!EqualityComparer<T>.Default.Equals(backingField, newValue))
-            {
-                backingField = newValue;
-                OnEntityChanged();
-            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ShapeTests.ViewModel.ViewModels
 
     public class AddTriangleViewModel : ViewModel, IPopupViewModel
     {
-        private readonly ITrianglesRepository _TriangleRepo;
+        private readonly IShapesRepository _ShapeRepo;
 
         private int _OwnerId;
 
@@ -37,9 +37,9 @@ namespace ShapeTests.ViewModel.ViewModels
         }
 
 
-        public AddTriangleViewModel(ITrianglesRepository triangleRepo)
+        public AddTriangleViewModel(IShapesRepository shapeRepo)
         {
-            _TriangleRepo = triangleRepo;
+            _ShapeRepo = shapeRepo;
             AddTriangleCommand = new MvxCommand(AddTriangle);
             CancelCommand = new MvxCommand(Cancel);
         }
@@ -51,7 +51,7 @@ namespace ShapeTests.ViewModel.ViewModels
                 Name = "New Triangle"                            
             };
 
-            _TriangleRepo.AddTriangle(triangle);
+            _ShapeRepo.AddShape(triangle);
             Close(this);
         }
 

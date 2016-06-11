@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace ShapeTest.Business.Repositories
 {
-    public delegate void TriangleRemovedEventHandler(object sender, TriangleEventArgs args);
+    public delegate void TriangleRemovedEventHandler(object sender, ShapeEventArgs args);
 }

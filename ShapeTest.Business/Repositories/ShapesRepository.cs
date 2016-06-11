@@ -3,13 +3,13 @@ using ShapeTest.Business.Entities;
 
 namespace ShapeTest.Business.Repositories
 {
-    public class TrianglesRepository : ITrianglesRepository
+    public class ShapesRepository : IShapesRepository
     {
-        private readonly List<Triangle> _Triangles; 
+        private readonly IList<IShape> _Shapes; 
 
-        public TrianglesRepository()
+        public ShapesRepository()
         {
-            _Triangles = new List<Triangle>
+            _Shapes = new List<IShape>
             {
                 new Triangle
                 {
@@ -32,28 +32,28 @@ namespace ShapeTest.Business.Repositories
             };
         }
 
-        public event TriangleAddedEventHandler TriangleAdded;
+        public event ShapeAddedEventHandler ShapeAdded;
 
-        public List<Triangle> GetTriangles()
+        public IList<IShape> GetShapes()
         {
-            return _Triangles;
+            return _Shapes;
         }
 
-        public void AddTriangle(Triangle triangle)
+        public void AddShape(IShape shape)
         {
-            _Triangles.Add(triangle);
-            OnTriangleAdded(triangle);
+            _Shapes.Add(shape);
+            OnShapeAdded(shape);
         }
 
-        public bool RemoveTriangle(Triangle triangle)
+        public bool RemoveShape(IShape shape)
         {
-            return _Triangles.Remove(triangle);
+            return _Shapes.Remove(shape);
         }
 
-        protected void OnTriangleAdded(Triangle triangle)
+        protected void OnShapeAdded(IShape shape)
         {
-            TriangleAddedEventHandler handler = TriangleAdded;
-            handler?.Invoke(this, new TriangleEventArgs(triangle));
+            ShapeAddedEventHandler handler = ShapeAdded;
+            handler?.Invoke(this, new ShapeEventArgs(shape));
         }
     }
 }

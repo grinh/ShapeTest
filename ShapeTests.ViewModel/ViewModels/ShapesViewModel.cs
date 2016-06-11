@@ -12,15 +12,13 @@ namespace ShapeTests.ViewModel
 {
     public class ShapesViewModel : ViewModel
     {
-        private readonly ITrianglesRepository _TrianglesRepo;
+        private readonly IShapesRepository _ShapesRepo;
         private readonly IComputeAreaService _ComputeAreaService;
         private readonly ISubmissionService _SubmissionService;
 
-        private ObservableCollection<TriangleListItemViewModel> _TriangleListItems;
+        private ObservableCollection<IShape> _Shapes;
 
-        private TriangleListItemViewModel _SelectedTriangleListItemViewModel;
-
-        private TriangleViewModel _SelectedTriangleContentViewModel;
+        private IShape _SelectedShape;
 
         private double _TotalArea;
 
@@ -29,15 +27,13 @@ namespace ShapeTests.ViewModel
         private MvxCommand _ComputeAreaCommand;
         private MvxCommand _SubmitAreaCommand;
 
-        public ShapesViewModel(ITrianglesRepository triangleRepo, 
+        public ShapesViewModel(IShapesRepository shapeRepo, 
                                IComputeAreaService computeAreaService,
                                ISubmissionService submissionService)
         {
-            _TrianglesRepo = triangleRepo;
+            _ShapesRepo = shapeRepo;
             _ComputeAreaService = computeAreaService;
             _SubmissionService = submissionService;
-
-            _TriangleListItems = new ObservableCollection<TriangleListItemViewModel>();
 
             AddTriangleCommand = new MvxCommand(AddTriangle);
             RemoveTriangleCommand = new MvxCommand(RemoveSelectedTriangle);
@@ -45,22 +41,16 @@ namespace ShapeTests.ViewModel
             SubmitAreaCommand = new MvxCommand(SubmitArea);
         }
 
-        public ObservableCollection<TriangleListItemViewModel> TriangleListItems
+        public ObservableCollection<IShape> Shapes
         {
-            get { return _TriangleListItems; }
-            set { SetAndRaisePropertyChanged(ref _TriangleListItems, value); }
+            get { return _Shapes; }
+            set { SetAndRaisePropertyChanged(ref _Shapes, value); }
         }
 
-        public TriangleListItemViewModel SelectedTriangleListItemViewModel
+        public IShape SelectedShape
         {
-            get { return _SelectedTriangleListItemViewModel; }
-            set { SetAndRaisePropertyChanged(ref _SelectedTriangleListItemViewModel, value); }
-        }
-
-        public TriangleViewModel SelectedTriangleContentViewModel
-        {
-            get { return _SelectedTriangleContentViewModel; }
-            set { SetAndRaisePropertyChanged(ref _SelectedTriangleContentViewModel, value); }
+            get { return _SelectedShape; }
+            set { SetAndRaisePropertyChanged(ref _SelectedShape, value); }
         }
 
         public double TotalArea
@@ -93,23 +83,12 @@ namespace ShapeTests.ViewModel
             set { SetAndRaisePropertyChanged(ref _SubmitAreaCommand, value); }
         }
 
-        public override void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
-        {
-            base.RaisePropertyChanged(changedArgs);
-
-            if (changedArgs.PropertyName == nameof(SelectedTriangleListItemViewModel))
-            {
-                UpdateTriangleContent();
-            }
-        }
-
         public override void Start()
         {
-           List<Triangle> triangles = _TrianglesRepo.GetTriangles();
-           TriangleListItems = CreateListViewModelsFromTriangeList(triangles);
-           SelectedTriangleListItemViewModel = TriangleListItems.FirstOrDefault();
+           Shapes = new ObservableCollection<IShape>(_ShapesRepo.GetShapes());
+           SelectedShape = Shapes.FirstOrDefault();
 
-            _TrianglesRepo.TriangleAdded += OnTriangleAdded;
+            _ShapesRepo.ShapeAdded += OnShapeAdded;
         }
 
         public void AddTriangle()
@@ -117,20 +96,18 @@ namespace ShapeTests.ViewModel
             ShowViewModel<AddTriangleViewModel>();
         }
 
-        public void OnTriangleAdded(object sender, TriangleEventArgs args)
+        public void OnShapeAdded(object sender, ShapeEventArgs args)
         {
-            TriangleListItemViewModel viewModel = new TriangleListItemViewModel { Triangle = args.Triangle };
-            TriangleListItems.Add(viewModel);
+            Shapes.Add(args.Shape);
         }
 
         public void RemoveSelectedTriangle()
         {
-            if (SelectedTriangleListItemViewModel != null)
+            if (SelectedShape != null)
             {
-                var viewModelToDelete = SelectedTriangleListItemViewModel;
-                SelectedTriangleContentViewModel = null;
-                _TrianglesRepo.RemoveTriangle(viewModelToDelete.Triangle);
-                TriangleListItems.Remove(viewModelToDelete);
+                _ShapesRepo.RemoveShape(SelectedShape);
+                Shapes.Remove(SelectedShape);
+	            SelectedShape = null;
             }
         }
 
@@ -142,33 +119,6 @@ namespace ShapeTests.ViewModel
         public void SubmitArea()
         {
             _SubmissionService.SubmitTotalArea(TotalArea);
-        }
-
-        private ObservableCollection<TriangleListItemViewModel> CreateListViewModelsFromTriangeList(List<Triangle> triangles)
-        {
-            ObservableCollection<TriangleListItemViewModel> viewModels = new ObservableCollection<TriangleListItemViewModel>();
-            foreach (var triangle in triangles)
-            {
-                TriangleListItemViewModel viewModel = new TriangleListItemViewModel { Triangle = triangle };
-                viewModels.Add(viewModel);
-            }
-            return viewModels;
-        }
-
-        private void UpdateTriangleContent()
-        {
-            if (SelectedTriangleListItemViewModel != null)
-            {
-                TriangleViewModel contentViewModel = new TriangleViewModel
-                {
-                    Triangle = _SelectedTriangleListItemViewModel.Triangle
-                };
-                SelectedTriangleContentViewModel = contentViewModel;
-            }
-            else
-            {
-                SelectedTriangleListItemViewModel = null;
-            }
         }
     }
 }
