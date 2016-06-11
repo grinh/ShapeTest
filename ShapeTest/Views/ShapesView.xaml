@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"
+                  xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
              xmlns:viewModels="clr-namespace:ShapeTests.ViewModel.ViewModels;assembly=ShapeTests.ViewModel"
              xmlns:model="clr-namespace:ShapeTest.Business.Entities;assembly=ShapeTest.Business"
              xmlns:templateSelectors="clr-namespace:ShapeTest.Wpf.TemplateSelectors"
+             xmlns:controls="clr-namespace:ShapeTest.Wpf.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <views:MvxWpfView.Resources>
@@ -23,15 +25,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource ShapeListItemTemplate}"/>
+        <ListBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource ShapeListItemTemplate}"/>
         <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedShape}" ContentTemplateSelector="{StaticResource ShapeContentTemplateSelector}"/>
 
-        <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="0">
+        <Grid Margin="4,4,4,4" Grid.Row="2" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="8"/>
@@ -41,19 +44,25 @@
             <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveTriangleCommand}"/>
         </Grid>
 
-        <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Compute Total Area" Command="{Binding ComputeAreaCommand}"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <Button Margin="4"  Grid.Column="0" Grid.Row="1" Content="Compute Total Area" Command="{Binding ComputeAreaCommand}"/>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Text="Total Area:"/>
                 <TextBlock VerticalAlignment="Center" Text="{Binding TotalArea}"></TextBlock>
             </StackPanel>
-            <Button Grid.Column="2" Content="Submit Total Area" Command="{Binding SubmitAreaCommand}"/>
-        </Grid>
 
+            <controls:ProgressRingControl Grid.Column="2" Message="Sending data..." IsActive="{Binding SubmissionInProgress}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="4,0,0,4" />
+
+            <Button Margin="4"  Grid.Column="2" Grid.Row="1" Content="Submit Total Area" Command="{Binding SubmitAreaCommand}"/>
+        </Grid>
     </Grid>
 </views:MvxWpfView>

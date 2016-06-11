@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 using ShapeTest.Business.Entities;
 using ShapeTest.Business.Repositories;
@@ -15,6 +17,7 @@ namespace ShapeTests.ViewModel
         private readonly IShapesRepository _ShapesRepo;
         private readonly IComputeAreaService _ComputeAreaService;
         private readonly ISubmissionService _SubmissionService;
+	    private bool _SubmissionInProgress;
 
         private ObservableCollection<IShape> _Shapes;
 
@@ -38,10 +41,15 @@ namespace ShapeTests.ViewModel
             AddTriangleCommand = new MvxCommand(AddTriangle);
             RemoveTriangleCommand = new MvxCommand(RemoveSelectedTriangle);
             ComputeAreaCommand = new MvxCommand(ComputeTotalArea);
-            SubmitAreaCommand = new MvxCommand(SubmitArea);
+            SubmitAreaCommand = new MvxCommand(SubmitArea, CanSubmitArea);
         }
 
-        public ObservableCollection<IShape> Shapes
+	    private bool CanSubmitArea()
+	    {
+		    return !_SubmissionInProgress;
+	    }
+
+	    public ObservableCollection<IShape> Shapes
         {
             get { return _Shapes; }
             set { SetAndRaisePropertyChanged(ref _Shapes, value); }
@@ -83,7 +91,18 @@ namespace ShapeTests.ViewModel
             set { SetAndRaisePropertyChanged(ref _SubmitAreaCommand, value); }
         }
 
-        public override void Start()
+	    public bool SubmissionInProgress
+	    {
+		    get
+		    {
+			    return _SubmissionInProgress;
+			}
+		    private set
+		    {
+			    SetAndRaisePropertyChanged(ref _SubmissionInProgress, value);
+		    }
+		} 
+	    public override void Start()
         {
            Shapes = new ObservableCollection<IShape>(_ShapesRepo.GetShapes());
            SelectedShape = Shapes.FirstOrDefault();
@@ -116,9 +135,31 @@ namespace ShapeTests.ViewModel
             TotalArea = _ComputeAreaService.ComputeTotalArea();
         }
 
-        public void SubmitArea()
+        public async void SubmitArea()
         {
-            _SubmissionService.SubmitTotalArea(TotalArea);
+	        if (SubmissionInProgress)
+	        {
+		        return;
+	        }
+
+	        SubmissionInProgress = true;
+			SubmitAreaCommand.RaiseCanExecuteChanged();
+
+	        await Task.Run(() =>
+	        {
+		        try
+		        {
+					_SubmissionService.SubmitTotalArea(TotalArea);
+				}
+		        catch (Exception)
+		        {
+					//TODO
+		        }
+		        
+		        SubmissionInProgress = false;
+
+				SubmitAreaCommand.RaiseCanExecuteChanged();
+	        });
         }
     }
 }

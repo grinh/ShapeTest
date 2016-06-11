@@ -86,6 +86,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\PopupWindowControl.cs" />
+    <Compile Include="Controls\ProgressRingControl.xaml.cs">
+      <DependentUpon>ProgressRingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Popup\PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
@@ -100,6 +103,10 @@
     <Compile Include="Views\ShapesView.xaml.cs">
       <DependentUpon>ShapesView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ProgressRingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
