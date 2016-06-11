@@ -53,6 +53,10 @@ namespace ShapeTest.ViewModel.UnitTests
 
 			viewModel.TotalArea.Should().BeApproximately(expectedTotalArea, precision);
 
+//			var dispatcher = new MockMvxViewDispatcher(viewDispatcherMock);
+//
+//			Ioc.RegisterSingleton(dispatcher);
+//			Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 		}
 
     }
