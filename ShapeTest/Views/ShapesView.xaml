@@ -6,19 +6,19 @@
              xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"
              xmlns:viewModels="clr-namespace:ShapeTests.ViewModel.ViewModels;assembly=ShapeTests.ViewModel"
              xmlns:model="clr-namespace:ShapeTest.Business.Entities;assembly=ShapeTest.Business"
+             xmlns:templateSelectors="clr-namespace:ShapeTest.Wpf.TemplateSelectors"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <views:MvxWpfView.Resources>
-        <DataTemplate x:Key ="TriangleListItemTemplate" DataType="{x:Type model:IShape}">
+        <DataTemplate x:Key ="ShapeListItemTemplate" DataType="{x:Type model:IShape}">
             <Grid>
-                <TextBlock x:Name="TriangleName" Text="{Binding Name}" />
+                <TextBlock x:Name="ShapeName" Text="{Binding Name}" />
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="TriangleContentTemplate" DataType="{x:Type model:IShape}">
+        <DataTemplate x:Key="SquareContentTemplate" DataType="{x:Type model:Square}">
             <Grid HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -29,19 +29,94 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
-                
+
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
                 <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Base:"/>
-                <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding Base}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Side lenght:"/>
+                <TextBox Grid.Row="2" Grid.Column="1"  x:Name="SideLenghtEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideBase}"/>
+            </Grid>
+        </DataTemplate>
 
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Height:"/>
-                <TextBox Grid.Row="3" Grid.Column="1"  x:Name="HeightEntry" Width="120" Margin="4,0,4,0" Text="{Binding Height}"/>
+        <DataTemplate x:Key="RectangleContentTemplate" DataType="{x:Type model:Rectangle}">
+            <Grid HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Lenght:"/>
+                <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LenghtEntry" Width="120" Margin="4,0,4,0" Text="{Binding Length}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Width:"/>
+                <TextBox Grid.Row="3" Grid.Column="1"  x:Name="WidthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Width}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CircleContentTemplate" DataType="{x:Type model:Circle}">
+            <Grid HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Radius:"/>
+                <TextBox Grid.Row="2" Grid.Column="1"  x:Name="RadiusEntry" Width="120" Margin="4,0,4,0" Text="{Binding Radius}"/>
 
             </Grid>
         </DataTemplate>
-        
+
+        <DataTemplate x:Key="TriangleContentTemplate" DataType="{x:Type model:Triangle}">
+        <Grid HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Base:"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding Base}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Height:"/>
+            <TextBox Grid.Row="3" Grid.Column="1"  x:Name="HeightEntry" Width="120" Margin="4,0,4,0" Text="{Binding Height}"/>
+
+        </Grid>
+        </DataTemplate>
+
+        <templateSelectors:ShapeContentTemplateSelector x:Key="ShapeContentTemplateSelector" CircleTemplate="{StaticResource CircleContentTemplate}" RectangleTemplate="{StaticResource RectangleContentTemplate}" TriangleTemplate="{StaticResource TriangleContentTemplate}" SquareTemplate="{StaticResource SquareContentTemplate}" />
+
     </views:MvxWpfView.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -52,8 +127,8 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource TriangleListItemTemplate}"/>
-        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedShape}" ContentTemplate="{StaticResource TriangleContentTemplate}"/>
+        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource ShapeListItemTemplate}"/>
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedShape}" ContentTemplateSelector="{StaticResource ShapeContentTemplateSelector}"/>
         
         <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>

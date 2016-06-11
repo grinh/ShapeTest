@@ -39,7 +39,12 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Circle.cs" />
     <Compile Include="Entities\EntityChangedEventHandler.cs" />
+    <Compile Include="Entities\IShape.cs" />
+    <Compile Include="Entities\ObservableEntity.cs" />
+    <Compile Include="Entities\Rectangle.cs" />
+    <Compile Include="Entities\Square.cs" />
     <Compile Include="Entities\Triangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ShapeAddedEventHandler.cs" />

@@ -28,8 +28,24 @@ namespace ShapeTest.Business.Repositories
                     Name = "Triangle 3",
                     Base = 42,
                     Height = 22
-                }
-            };
+                },
+				new Rectangle()
+				{
+					Name = "Rectangle",
+					Length = 42,
+					Width = 22
+				},
+				new Square()
+				{
+					Name = "Square",
+					SideBase = 22
+				},
+				new Circle()
+				{
+					Name = "Circle",
+					Radius = 20
+				}
+			};
         }
 
         public event ShapeAddedEventHandler ShapeAdded;

@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Setup.cs" />
     <Compile Include="ShapeTestPresenter.cs" />
+    <Compile Include="TemplateSelectors\ShapeContentTemplateSelector.cs" />
     <Compile Include="Views\AddTriangleView.xaml.cs">
       <DependentUpon>AddTriangleView.xaml</DependentUpon>
     </Compile>
