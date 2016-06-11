@@ -46,7 +46,7 @@
     <Compile Include="Entities\Rectangle.cs" />
     <Compile Include="Entities\Square.cs" />
     <Compile Include="Entities\Triangle.cs" />
-    <Compile Include="Enums\SubmisionResult.cs" />
+    <Compile Include="Enums\SubmissionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ShapeAddedEventHandler.cs" />
     <Compile Include="Repositories\ShapeEventArgs.cs" />
