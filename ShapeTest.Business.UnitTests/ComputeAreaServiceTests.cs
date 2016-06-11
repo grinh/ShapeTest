@@ -14,22 +14,22 @@ namespace ShapeTest.Business.UnitTest
         private const double ExpectedPrecision = 0.001;
 
         private MockRepository _MockRepository;
-        private Mock<IShapesRepository> _MockTrianglesRepository;
-      
-        [TestInitialize]
+        private Mock<IShapesRepository> _MockShapeRepository;
+
+		[TestInitialize]
         public void Setup()
         {
             _MockRepository = new MockRepository(MockBehavior.Strict);
-            _MockTrianglesRepository = _MockRepository.Create<IShapesRepository>();
-        }
+            _MockShapeRepository = _MockRepository.Create<IShapesRepository>();
+		}
 
         [TestMethod]
         public void ShouldComputeTotalArea()
         {
             // Arrange
-            const double expectedResult = 13;
+            const double expectedResult = 17;
 
-            IList<IShape> triangles = new List<IShape>
+            IList<IShape> shapes = new List<IShape>
             {
                 new Triangle
                     {
@@ -40,12 +40,16 @@ namespace ShapeTest.Business.UnitTest
                     {
                         Base = 3,
                         Height = 6
-                    }                                   
-            };
+                    },
+				new Square
+					{
+						SideBase = 2
+					}
+			};
 
-            _MockTrianglesRepository.Setup(m => m.GetShapes()).Returns(triangles);
+            _MockShapeRepository.Setup(m => m.GetShapes()).Returns(shapes);
 
-            ComputeAreaService computeAreaService = new ComputeAreaService(_MockTrianglesRepository.Object);
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockShapeRepository.Object);
 
             // Act
             var result = computeAreaService.ComputeTotalArea();
@@ -53,7 +57,28 @@ namespace ShapeTest.Business.UnitTest
             // Assert
             result.Should().BeApproximately(expectedResult, ExpectedPrecision);
 
-            _MockTrianglesRepository.VerifyAll();
+            _MockShapeRepository.VerifyAll();
         }
-    }
+
+		[TestMethod]
+		public void ShouldComputeEmpty()
+		{
+			// Arrange
+			const double expectedResult = 0;
+
+			IList<IShape> shapes = new List<IShape>();
+
+			_MockShapeRepository.Setup(m => m.GetShapes()).Returns(shapes);
+
+			ComputeAreaService computeAreaService = new ComputeAreaService(_MockShapeRepository.Object);
+
+			// Act
+			var result = computeAreaService.ComputeTotalArea();
+
+			// Assert
+			result.Should().BeApproximately(expectedResult, ExpectedPrecision);
+
+			_MockShapeRepository.VerifyAll();
+		}
+	}
 }

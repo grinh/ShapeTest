@@ -10,7 +10,7 @@ namespace ShapeTest.Business.UnitTests
 		private const double ExpectedPrecision = 0.001;
 
 		[TestMethod]
-		public void TriangleCalculateAreaTest()
+		public void ShouldCalculateAreaOfTriandles()
 		{
 			const double expectedResult = 2d;
 			const double expectedResult2 = 0d;
@@ -67,7 +67,7 @@ namespace ShapeTest.Business.UnitTests
 		}
 
 		[TestMethod]
-		public void RectangleCalculateAreaTest()
+		public void ShouldCalculateAreaOfRectangles()
 		{
 			const double expectedResult = 4d;
 			const double expectedResult2 = 0d;
@@ -124,7 +124,7 @@ namespace ShapeTest.Business.UnitTests
 		}
 
 		[TestMethod]
-		public void SquareCalculateAreaTest()
+		public void ShouldCalculateAreaOfSquares()
 		{
 			const double expectedResult = 4d;
 			const double expectedResult2 = 0d;
@@ -169,7 +169,7 @@ namespace ShapeTest.Business.UnitTests
 		}
 
 		[TestMethod]
-		public void CircleCalculateAreaTest()
+		public void ShouldCalculateAreaOfCircles()
 		{
 			const double expectedResult = 12.5663d;
 			const double expectedResult2 = 0d;

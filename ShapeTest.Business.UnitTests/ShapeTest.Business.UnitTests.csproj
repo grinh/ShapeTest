@@ -74,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ComputeAreaServiceTests.cs" />
     <Compile Include="ShapeCalculateAreaTests.cs" />
+    <Compile Include="ShapeEvntArgsTests.cs" />
+    <Compile Include="ShapePropertySetTests.cs" />
+    <Compile Include="ShapeRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShapeTest.Business\ShapeTest.Business.csproj">
