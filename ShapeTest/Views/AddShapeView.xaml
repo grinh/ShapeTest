@@ -5,11 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShapeTest.Wpf.Views"
              xmlns:views="clr-namespace:MvvmCross.Wpf.Views;assembly=MvvmCross.Wpf"
+             xmlns:templateSelectors="clr-namespace:ShapeTest.Wpf.TemplateSelectors"
              mc:Ignorable="d" 
              x:Name="MainView"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Border x:Name="LayoutRoot" CornerRadius="8" Width="300"  BorderThickness="1" Background="Transparent">
-        <Grid Background="Black">
+             <views:MvxWpfView.Resources>
+             
+             <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../Resources/AddShapeDataTemplates.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+
+            <templateSelectors:AddShapeButtonContentTemplateSelector x:Key="AddShapeButtonContentTemplateSelector" TriangleDataTemplate="{StaticResource TriangleButtonDataTemplate}" RectangleDataTemplate="{StaticResource RectangleButtonDataTemplate}" SquarepeDataTemplate="{StaticResource SquareButtonDataTemplate}" CircleDataTemplate="{StaticResource CircleButtonDataTemplate}" UnknownShapeDataTemplate="{StaticResource UnknownButtonDataTemplate}" />
+        </ResourceDictionary>
+             </views:MvxWpfView.Resources>
+    <Border x:Name="LayoutRoot" Width="324" MaxHeight="600"  BorderThickness="1" Background="WhiteSmoke" BorderBrush="Transparent">
+        <Grid  Margin="12">
            <Grid.RowDefinitions>
                <RowDefinition/>
                <RowDefinition/>
@@ -19,16 +30,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Select shape to add" Foreground="White"/>
-            <ListView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  ItemsSource="{Binding ShapeTypes}" >
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Select shape to add" Foreground="Black"/>
+            <ListView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,12"  ItemsSource="{Binding ShapeTypes}"  Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Button Grid.Row="2" Grid.Column="0" Content="{Binding}" Width="100" Height="30" Command="{Binding ViewModel.AddTriangleCommand, ElementName=MainView}" CommandParameter="{Binding}" />        
+                        <Button Grid.Row="2" Grid.Column="0" Content="{Binding}" ContentTemplateSelector="{StaticResource AddShapeButtonContentTemplateSelector}" Width="100" Height="30" Command="{Binding ViewModel.AddTriangleCommand, ElementName=MainView}" CommandParameter="{Binding}" />        
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" Width="280" ></WrapPanel>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="220" ></WrapPanel>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>

@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Setup.cs" />
     <Compile Include="ShapeTestPresenter.cs" />
+    <Compile Include="TemplateSelectors\AddShapeButtonContentTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\ShapeContentTemplateSelector.cs" />
     <Compile Include="Views\AddShapeView.xaml.cs">
       <DependentUpon>AddShapeView.xaml</DependentUpon>
@@ -112,6 +113,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Popup\PopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\AddShapeDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -44,7 +44,7 @@ namespace ShapeTests.ViewModel.ViewModels
 
         public AddShapeViewModel(IShapesRepository shapeRepo)
         {
-			ShapeTypes = new List<Type> { typeof(Triangle), typeof(Circle), typeof(Square), typeof(Rectangle) };
+			ShapeTypes = new List<Type> { typeof(Triangle), typeof(Circle), typeof(Square), typeof(Rectangle), };
 			_ShapeRepo = shapeRepo;
 	        AddTriangleCommand = new MvxCommand<Type>(AddShape);
             CancelCommand = new MvxCommand(Cancel);
