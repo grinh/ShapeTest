@@ -115,6 +115,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\ContentDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddTriangleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
