@@ -13,7 +13,7 @@
              
              <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="../Resources/AddShapeDataTemplates.xaml" />
+                    <ResourceDictionary Source="../Resources/AddShapeTemplates.xaml" />
                 </ResourceDictionary.MergedDictionaries>
 
             <templateSelectors:AddShapeButtonContentTemplateSelector x:Key="AddShapeButtonContentTemplateSelector" TriangleDataTemplate="{StaticResource TriangleButtonDataTemplate}" RectangleDataTemplate="{StaticResource RectangleButtonDataTemplate}" SquarepeDataTemplate="{StaticResource SquareButtonDataTemplate}" CircleDataTemplate="{StaticResource CircleButtonDataTemplate}" UnknownShapeDataTemplate="{StaticResource UnknownButtonDataTemplate}" />
@@ -34,12 +34,12 @@
             <ListView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,12"  ItemsSource="{Binding ShapeTypes}"  Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Button Grid.Row="2" Grid.Column="0" Content="{Binding}" ContentTemplateSelector="{StaticResource AddShapeButtonContentTemplateSelector}" Width="100" Height="30" Command="{Binding ViewModel.AddTriangleCommand, ElementName=MainView}" CommandParameter="{Binding}" />        
+                        <Button Content="{Binding}" ContentTemplateSelector="{StaticResource AddShapeButtonContentTemplateSelector}" Width="100" Height="30" Command="{Binding ViewModel.AddTriangleCommand, ElementName=MainView}" CommandParameter="{Binding}" />        
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="220" ></WrapPanel>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="220" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
