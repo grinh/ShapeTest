@@ -5,8 +5,19 @@ namespace ShapeTest.Business.Repositories
 {
     public class ShapesRepository : IShapesRepository
     {
-        private readonly IList<IShape> _Shapes; 
+        /// <summary>
+        /// List of all shapes in repository
+        /// </summary>
+        private readonly IList<IShape> _Shapes;
 
+        /// <summary>
+        /// Event raised when shape is added to repository
+        /// </summary>
+        public event ShapeAddedEventHandler ShapeAdded;
+
+        /// <summary>
+        /// Default constructor with default shapes
+        /// </summary>
         public ShapesRepository()
         {
             _Shapes = new List<IShape>
@@ -48,24 +59,39 @@ namespace ShapeTest.Business.Repositories
 			};
         }
 
-        public event ShapeAddedEventHandler ShapeAdded;
-
+        /// <summary>
+        /// Returns list of shapes
+        /// </summary>
+        /// <returns></returns>
         public IList<IShape> GetShapes()
         {
             return _Shapes;
         }
 
+        /// <summary>
+        /// Adds new shape to repository
+        /// </summary>
+        /// <param name="shape"></param>
         public void AddShape(IShape shape)
         {
             _Shapes.Add(shape);
             OnShapeAdded(shape);
         }
 
+        /// <summary>
+        /// Removes shape from repository
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
         public bool RemoveShape(IShape shape)
         {
             return _Shapes.Remove(shape);
         }
 
+        /// <summary>
+        /// Executes whenever new shape is added to repository
+        /// </summary>
+        /// <param name="shape"></param>
         protected void OnShapeAdded(IShape shape)
         {
             ShapeAddedEventHandler handler = ShapeAdded;
