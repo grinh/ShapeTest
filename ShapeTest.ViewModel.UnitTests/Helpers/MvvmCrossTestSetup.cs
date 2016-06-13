@@ -8,14 +8,16 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 
-namespace ShapeTest.ViewModel.UnitTests
+namespace ShapeTest.ViewModel.UnitTests.Helpers
 {
+    /// <summary>
+    /// Helper class that allows to UnitTest MvvmCross ViewModels
+    /// </summary>
 	public class MvvmCrossTestSetup
 	{
 	    private Mock<IMvxViewDispatcher> _mockViewDispatcher;
 
 	    public Mock<IMvxViewDispatcher> MvxViewDispatcher => _mockViewDispatcher;
-
 
         private IMvxIoCProvider _ioc;
 

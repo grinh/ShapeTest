@@ -11,6 +11,7 @@ using ShapeTest.Business.Entities;
 using ShapeTest.Business.Enums;
 using ShapeTest.Business.Repositories;
 using ShapeTest.Business.Services;
+using ShapeTest.ViewModel.UnitTests.Helpers;
 using ShapeTests.ViewModel;
 using ShapeTests.ViewModel.ViewModels;
 

@@ -100,8 +100,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AddShapeViewModelTests.cs" />
-    <Compile Include="MockMvxViewDispatcher.cs" />
-    <Compile Include="MvvmCrossTestSetup.cs" />
+    <Compile Include="Helpers\MockMvxViewDispatcher.cs" />
+    <Compile Include="Helpers\MvvmCrossTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapesViewModelTests.cs" />
   </ItemGroup>

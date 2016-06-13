@@ -6,6 +6,7 @@ using Moq;
 using MvvmCross.Core.ViewModels;
 using ShapeTest.Business.Entities;
 using ShapeTest.Business.Repositories;
+using ShapeTest.ViewModel.UnitTests.Helpers;
 using ShapeTests.ViewModel.ViewModels;
 
 namespace ShapeTest.ViewModel.UnitTests

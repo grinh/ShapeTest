@@ -3,8 +3,11 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Core;
 
-namespace ShapeTest.ViewModel.UnitTests
+namespace ShapeTest.ViewModel.UnitTests.Helpers
 {
+    /// <summary>
+    /// Helper class that mocks ViewDispatcher
+    /// </summary>
 	public class MockMvxViewDispatcher : MvxMainThreadDispatcher, IMvxViewDispatcher
 	{
 		private readonly IMvxViewDispatcher _decorated;
