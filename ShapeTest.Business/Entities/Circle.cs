@@ -2,7 +2,7 @@
 
 namespace ShapeTest.Business.Entities
 {
-	public class Circle : ObservableEntity, IShape
+	public sealed class Circle : ObservableEntity, IShape
 	{
 		private string _Name;
 		private double _Radius;

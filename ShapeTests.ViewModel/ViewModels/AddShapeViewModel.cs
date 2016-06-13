@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace ShapeTests.ViewModel.ViewModels
 {
@@ -44,7 +47,9 @@ namespace ShapeTests.ViewModel.ViewModels
 
         public AddShapeViewModel(IShapesRepository shapeRepo)
         {
-			ShapeTypes = new List<Type> { typeof(Triangle), typeof(Circle), typeof(Square), typeof(Rectangle), };
+            //get all types that implement IShape
+            ShapeTypes = ReflectionExtensions.GetTypes(typeof(IShape).GetTypeInfo().Assembly).Where(t => ReflectionExtensions.IsAssignableFrom(typeof(IShape), t) && t != typeof(IShape)).ToList();
+            
 			_ShapeRepo = shapeRepo;
 	        AddTriangleCommand = new MvxCommand<Type>(AddShape);
             CancelCommand = new MvxCommand(Cancel);

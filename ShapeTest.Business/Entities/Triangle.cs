@@ -1,6 +1,6 @@
 ﻿namespace ShapeTest.Business.Entities
 {
-	public class Triangle : ObservableEntity, IShape
+	public sealed class Triangle : ObservableEntity, IShape
 	{
 		private string _Name;
 		private double _Base;

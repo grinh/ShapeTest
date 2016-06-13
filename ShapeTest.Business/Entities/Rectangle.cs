@@ -1,6 +1,6 @@
 namespace ShapeTest.Business.Entities
 {
-	public class Rectangle : ObservableEntity, IShape
+	public sealed class Rectangle : ObservableEntity, IShape
 	{
 		private string _Name;
 		private double _Width;
