@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -201,7 +200,7 @@ namespace ShapeTest.ViewModel.UnitTests
 
             var viewModel = new ShapesViewModel(_MockShapesRepository.Object, _MockComputeAreaService.Object, _MockSubmissionService.Object);
 
-            //do not await this. Test needs to execute before this method is compleated
+            //do not await this. Test needs to proceed before this method is compleated
             viewModel.SubmitAreaAsync();
 
             viewModel.SubmissionInProgress.Should().Be(true);

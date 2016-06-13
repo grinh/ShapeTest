@@ -16,7 +16,7 @@ namespace ShapeTests.ViewModel.ViewModels
 
         private int _OwnerId;
 
-        private IMvxCommand _AddTriangleCommand;
+        private IMvxCommand _AddShapeCommand;
         private IMvxCommand _CancelCommand;
 
         public bool IsModal => true;
@@ -32,10 +32,10 @@ namespace ShapeTests.ViewModel.ViewModels
             set { SetAndRaisePropertyChanged(ref _OwnerId, value); }
         }
 
-        public IMvxCommand AddTriangleCommand
+        public IMvxCommand AddShapeCommand
         {
-            get { return _AddTriangleCommand; }
-            set { SetAndRaisePropertyChanged(ref _AddTriangleCommand, value);}
+            get { return _AddShapeCommand; }
+            set { SetAndRaisePropertyChanged(ref _AddShapeCommand, value);}
         }
 
         public IMvxCommand CancelCommand
@@ -51,7 +51,7 @@ namespace ShapeTests.ViewModel.ViewModels
             ShapeTypes = ReflectionExtensions.GetTypes(typeof(IShape).GetTypeInfo().Assembly).Where(t => ReflectionExtensions.IsAssignableFrom(typeof(IShape), t) && t != typeof(IShape)).ToList();
             
 			_ShapeRepo = shapeRepo;
-	        AddTriangleCommand = new MvxCommand<Type>(AddShape);
+	        AddShapeCommand = new MvxCommand<Type>(AddShape);
             CancelCommand = new MvxCommand(Cancel);
         }
 

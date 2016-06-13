@@ -34,7 +34,7 @@
             <ListView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,12"  ItemsSource="{Binding ShapeTypes}"  Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Transparent" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding}" ContentTemplateSelector="{StaticResource AddShapeButtonContentTemplateSelector}" Width="100" Height="30" Command="{Binding ViewModel.AddTriangleCommand, ElementName=MainView}" CommandParameter="{Binding}" />        
+                        <Button Content="{Binding}" ContentTemplateSelector="{StaticResource AddShapeButtonContentTemplateSelector}" Width="100" Height="30" Command="{Binding ViewModel.AddShapeCommand, ElementName=MainView}" CommandParameter="{Binding}" />        
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemsPanel>
