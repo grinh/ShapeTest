@@ -225,6 +225,7 @@ namespace ShapeTests.ViewModel
         private void OnShapeAdded(object sender, ShapeEventArgs args)
         {
             Shapes.Add(args.Shape);
+            SelectedShape = args.Shape;
         }
 
         /// <summary>
@@ -236,7 +237,7 @@ namespace ShapeTests.ViewModel
             {
                 _ShapesRepo.RemoveShape(SelectedShape);
                 Shapes.Remove(SelectedShape);
-                SelectedShape = null;
+                SelectedShape = Shapes.FirstOrDefault();
             }
         }
 
