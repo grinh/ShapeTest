@@ -1,7 +1,9 @@
 using System;
 using System.Diagnostics;
+using Moq;
 using MvvmCross.Core;
 using MvvmCross.Core.Platform;
+using MvvmCross.Core.Views;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
@@ -10,7 +12,12 @@ namespace ShapeTest.ViewModel.UnitTests
 {
 	public class MvvmCrossTestSetup
 	{
-		private IMvxIoCProvider _ioc;
+	    private Mock<IMvxViewDispatcher> _mockViewDispatcher;
+
+	    public Mock<IMvxViewDispatcher> MvxViewDispatcher => _mockViewDispatcher;
+
+
+        private IMvxIoCProvider _ioc;
 
 		protected IMvxIoCProvider Ioc
 		{
@@ -42,9 +49,15 @@ namespace ShapeTest.ViewModel.UnitTests
 
 		protected virtual void RegisterAdditionalSingletons()
 		{
-		}
+            _mockViewDispatcher = new Mock<IMvxViewDispatcher>();
 
-		private static void InitialiseSingletonCache()
+            var dispatcher = new MockMvxViewDispatcher(_mockViewDispatcher.Object);
+            
+            Ioc.RegisterSingleton(dispatcher);
+            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+        }
+
+        private static void InitialiseSingletonCache()
 		{
 			MvxSingletonCache.Initialize();
 		}

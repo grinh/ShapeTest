@@ -4,10 +4,12 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MvvmCross.Core.ViewModels;
 using ShapeTest.Business.Entities;
 using ShapeTest.Business.Repositories;
 using ShapeTest.Business.Services;
 using ShapeTests.ViewModel;
+using ShapeTests.ViewModel.ViewModels;
 
 namespace ShapeTest.ViewModel.UnitTests
 {
@@ -54,11 +56,6 @@ namespace ShapeTest.ViewModel.UnitTests
 			viewModel.ComputeAreaCommand.Execute(null);
 
 			viewModel.TotalArea.Should().BeApproximately(expectedTotalArea, precision);
-
-//			var dispatcher = new MockMvxViewDispatcher(viewDispatcherMock);
-//
-//			Ioc.RegisterSingleton(dispatcher);
-//			Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 		}
 
         [TestMethod]
@@ -113,6 +110,26 @@ namespace ShapeTest.ViewModel.UnitTests
             viewModel.RemoveShapeCommand.Execute(null);
 
             shapes.Count.Should().Be(expectedCount);
+        }
+
+
+        [TestMethod]
+	    public void ShoudShowAddNewShapeWindow()
+        {
+            var expectedCalledType = typeof(AddShapeViewModel);
+
+            var viewModel = new ShapesViewModel(_MockShapesRepository.Object, _MockComputeAreaService.Object, _MockSubmissionService.Object);
+
+            Type calledType = null;
+
+            TestSetup.Setup();
+
+            TestSetup.MvxViewDispatcher.Setup(p => p.ShowViewModel(It.IsAny<MvxViewModelRequest>())).Callback<MvxViewModelRequest>(request => calledType = request.ViewModelType);
+
+            viewModel.AddShapeCommand.Execute(null);
+            
+            TestSetup.MvxViewDispatcher.Verify(p=>p.ShowViewModel(It.IsAny<MvxViewModelRequest>()));
+            calledType.Should().Be(expectedCalledType);
         }
     }
 }
