@@ -27,7 +27,7 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
             <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Name}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Side lenght:"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Side length:"/>
             <TextBox Grid.Row="2" Grid.Column="1"  x:Name="SideLenghtEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding SideLength}"/>
         </Grid>
     </DataTemplate>
@@ -50,7 +50,7 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
             <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Name}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Lenght:"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Length:"/>
             <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LenghtEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Length}"/>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Width:"/>
