@@ -201,29 +201,29 @@ namespace ShapeTests.ViewModel
             _ShapesRepo.ShapeAdded += OnShapeAdded;
         }
 
-		/// <summary>
-		/// Handler for AddShapeCommand
-		/// </summary>
-		public void AddShape()
+        /// <summary>
+        /// Handler for AddShapeCommand
+        /// </summary>
+        private void AddShape()
         {
             ShowViewModel<AddShapeViewModel>();
         }
 
-		/// <summary>
-		/// Event handler. Invoked whenever new shape is added to shape repository
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-        public void OnShapeAdded(object sender, ShapeEventArgs args)
+        /// <summary>
+        /// Event handler. Invoked whenever new shape is added to shape repository
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void OnShapeAdded(object sender, ShapeEventArgs args)
         {
             Shapes.Add(args.Shape);
         }
 
 
-		/// <summary>
-		/// Handler for RemoveShapeCommand
-		/// </summary>
-        public void RemoveSelectedShape()
+        /// <summary>
+        /// Handler for RemoveShapeCommand
+        /// </summary>
+        private void RemoveSelectedShape()
         {
             if (SelectedShape != null)
             {
@@ -236,15 +236,15 @@ namespace ShapeTests.ViewModel
 		/// <summary>
 		/// Handler for ComputeAreaCommand
 		/// </summary>
-		public void ComputeTotalArea()
+		private void ComputeTotalArea()
         {
             TotalArea = _ComputeAreaService.ComputeTotalArea();
         }
 
-		/// <summary>
-		/// Handler for SubmitAreaCommand. It will try to submit computed area.
-		/// </summary>
-		public async void SubmitArea()
+        /// <summary>
+        /// Handler for SubmitAreaCommand. It will try to submit computed area.
+        /// </summary>
+        private async void SubmitArea()
         {
 	        if (SubmissionInProgress)
 	        {

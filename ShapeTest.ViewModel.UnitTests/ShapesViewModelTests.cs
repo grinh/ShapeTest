@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -49,7 +51,7 @@ namespace ShapeTest.ViewModel.UnitTests
 
 			viewModel.TotalArea.Should().BeApproximately(0, precision);
 
-			viewModel.ComputeTotalArea();
+			viewModel.ComputeAreaCommand.Execute(null);
 
 			viewModel.TotalArea.Should().BeApproximately(expectedTotalArea, precision);
 
@@ -59,5 +61,58 @@ namespace ShapeTest.ViewModel.UnitTests
 //			Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 		}
 
+        [TestMethod]
+	    public void ShouldRemoveSelectedShape()
+        {
+            const int expectedCount = 0;
+
+            var shapes = new List<IShape>()
+            {
+                new Square
+                {
+                    SideBase = 2
+                }
+            };
+
+            _MockShapesRepository.Setup(p => p.GetShapes()).Returns(shapes);
+            _MockShapesRepository.Setup(p => p.RemoveShape(It.IsAny<IShape>())).Callback<IShape>(sh => shapes.Remove(sh));
+
+            var viewModel = new ShapesViewModel(_MockShapesRepository.Object, _MockComputeAreaService.Object, _MockSubmissionService.Object);
+
+            viewModel.Start();
+
+            viewModel.SelectedShape = shapes.Single();
+
+            viewModel.RemoveShapeCommand.Execute(null);
+
+            shapes.Count.Should().Be(expectedCount);
+	    }
+
+        [TestMethod]
+        public void ShouldNotRemoveAnyShape()
+        {
+            const int expectedCount = 1;
+
+            var shapes = new List<IShape>()
+            {
+                new Square
+                {
+                    SideBase = 2
+                }
+            };
+
+            _MockShapesRepository.Setup(p => p.GetShapes()).Returns(shapes);
+            _MockShapesRepository.Setup(p => p.RemoveShape(It.IsAny<IShape>())).Callback<IShape>(sh => shapes.Remove(sh));
+
+            var viewModel = new ShapesViewModel(_MockShapesRepository.Object, _MockComputeAreaService.Object, _MockSubmissionService.Object);
+
+            viewModel.Start();
+
+            viewModel.SelectedShape = null;
+
+            viewModel.RemoveShapeCommand.Execute(null);
+
+            shapes.Count.Should().Be(expectedCount);
+        }
     }
 }
