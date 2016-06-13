@@ -17,6 +17,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/ContentDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <SolidColorBrush x:Key="LeftSectionBrush" Color="WhiteSmoke"></SolidColorBrush>
 
             <templateSelectors:ShapeContentTemplateSelector x:Key="ShapeContentTemplateSelector" CircleTemplate="{StaticResource CircleContentTemplate}" RectangleTemplate="{StaticResource RectangleContentTemplate}" TriangleTemplate="{StaticResource TriangleContentTemplate}" SquareTemplate="{StaticResource SquareContentTemplate}" />
             <converters:SubmissionResultToVisibilityConverter x:Key="SubmissionResultToVisibilityConverter" />
@@ -29,23 +31,24 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="128"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource ShapeListItemTemplate}"/>
+        
+        <ListBox Grid.Row="0" Grid.RowSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource LeftSectionBrush}"  BorderThickness="0" Grid.Column="0" Padding="4,0" ItemsSource="{Binding Shapes}" SelectedItem="{Binding SelectedShape}" ItemTemplate="{StaticResource ShapeListItemTemplate}"/>
         <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedShape}" ContentTemplateSelector="{StaticResource ShapeContentTemplateSelector}"/>
 
-        <Grid Margin="4,4,4,4" Grid.Row="2" Grid.Column="0">
+        <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource LeftSectionBrush}" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="8"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddShapeCommand}"/>
-            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveShapeCommand}"/>
+            <Button Margin="4" Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddShapeCommand}"/>
+            <Button Margin="0,4,4,4" Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveShapeCommand}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition  Height="40" />
                 <RowDefinition Height="40" />
@@ -56,11 +59,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Margin="4"  Grid.Column="0" Grid.Row="1" Content="Compute Total Area" Command="{Binding ComputeAreaCommand}"/>
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center" Text="Total Area:"/>
-                <TextBlock VerticalAlignment="Center" Text="{Binding TotalArea}"></TextBlock>
-            </StackPanel>
-
+            <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" ToolTip="{Binding TotalArea}" TextTrimming="CharacterEllipsis" >
+                <Run Text="Total Area:" />
+                <Run Text="{Binding TotalArea}" />
+            </TextBlock>
+            
             <controls:ProgressRingControl Grid.Column="2" Message="Sending data..." IsActive="{Binding SubmissionInProgress}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="4,0,0,4" />
 
             <TextBlock Grid.Column="2" Text="Error! Data not submited!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}, ConverterParameter='invert'}" />
