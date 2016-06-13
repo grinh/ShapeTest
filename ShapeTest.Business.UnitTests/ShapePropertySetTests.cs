@@ -52,12 +52,12 @@ namespace ShapeTest.Business.UnitTests
 			const double value1 = 2;
 			var triangle = new Square()
 			{
-				SideBase = value1,
+				SideLength = value1,
 				Name = name
 			};
 
 			triangle.Name.Should().Be(name);
-			triangle.SideBase.Should().Be(value1);
+			triangle.SideLength.Should().Be(value1);
 		}
 
 		[TestMethod]

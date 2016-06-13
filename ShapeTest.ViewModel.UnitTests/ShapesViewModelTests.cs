@@ -45,7 +45,7 @@ namespace ShapeTest.ViewModel.UnitTests
 			{
 				new Square
 				{
-					SideBase = 2
+					SideLength = 2
 				}
 			};
 
@@ -70,7 +70,7 @@ namespace ShapeTest.ViewModel.UnitTests
             {
                 new Square
                 {
-                    SideBase = 2
+                    SideLength = 2
                 }
             };
 
@@ -97,7 +97,7 @@ namespace ShapeTest.ViewModel.UnitTests
             {
                 new Square
                 {
-                    SideBase = 2
+                    SideLength = 2
                 }
             };
 
@@ -144,7 +144,7 @@ namespace ShapeTest.ViewModel.UnitTests
             {
                 new Square
                 {
-                    SideBase = 2
+                    SideLength = 2
                 }
             };
             

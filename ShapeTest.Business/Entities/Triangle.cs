@@ -2,31 +2,67 @@
 {
 	public sealed class Triangle : ObservableEntity, IShape
 	{
-		private string _Name;
-		private double _Base;
-		private double _Height;
+	    #region Fields
 
-		public string Name
-		{
-			get { return _Name; }
-			set { SetAndRaiseIfChanged(ref _Name, value); }
-		}
+	    /// <summary>
+	    /// Custom name of a shape
+	    /// </summary>
+	    private string _Name;
 
-		public double CalculateArea()
-		{
-			return 0.5 * Base * Height;
-		}
+	    /// <summary>
+	    /// Base of triangle
+	    /// </summary>
+	    private double _Base;
 
-		public double Base
-		{
-			get { return _Base; }
-			set { SetAndRaiseIfChanged(ref _Base, value); }
-		}
+	    /// <summary>
+	    /// Height of triangle
+	    /// </summary>
+	    private double _Height;
 
-		public double Height
-		{
-			get { return _Height; }
-			set { SetAndRaiseIfChanged(ref _Height, value); }
-		}
-	}
+	    #endregion
+
+	    #region Properties
+
+	    /// <summary>
+	    /// Custom name of a shape
+	    /// </summary>
+	    public string Name
+	    {
+	        get { return _Name; }
+	        set { SetAndRaiseIfChanged(ref _Name, value); }
+	    }
+
+	    /// <summary>
+	    /// Base of triangle
+	    /// </summary>
+	    public double Base
+	    {
+	        get { return _Base; }
+	        set { SetAndRaiseIfChanged(ref _Base, value); }
+	    }
+
+	    /// <summary>
+	    /// Height of triangle
+	    /// </summary>
+	    public double Height
+	    {
+	        get { return _Height; }
+	        set { SetAndRaiseIfChanged(ref _Height, value); }
+	    }
+
+	    #endregion
+
+	    #region Methods
+
+	    /// <summary>
+	    /// Can compute shape area
+	    /// </summary>
+	    /// <returns></returns>
+	    public double CalculateArea()
+	    {
+	        return 0.5*Base*Height;
+	    }
+
+	    #endregion
+    }
 }

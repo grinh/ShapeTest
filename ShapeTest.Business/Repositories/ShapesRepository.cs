@@ -38,7 +38,7 @@ namespace ShapeTest.Business.Repositories
 				new Square()
 				{
 					Name = "Square",
-					SideBase = 22
+					SideLength = 22
 				},
 				new Circle()
 				{

@@ -26,7 +26,7 @@
             <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Side lenght:"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="SideLenghtEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideBase}"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="SideLenghtEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideLength}"/>
         </Grid>
     </DataTemplate>
 

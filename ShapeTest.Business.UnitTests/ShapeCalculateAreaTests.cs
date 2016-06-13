@@ -134,7 +134,7 @@ namespace ShapeTest.Business.UnitTests
 
 			var square = new Square()
 			{
-				SideBase = 2d,
+				SideLength = 2d,
 				
 			};
 
@@ -142,17 +142,17 @@ namespace ShapeTest.Business.UnitTests
 
 			var square3 = new Square
 			{
-				SideBase = 0d,
+				SideLength = 0d,
 			};
 
 			var square4 = new Square
 			{
-				SideBase = 0.1d
+				SideLength = 0.1d
 			};
 
 			var square5 = new Square
 			{
-				SideBase = 2000000d
+				SideLength = 2000000d
 			};
 
 			var result = square.CalculateArea();

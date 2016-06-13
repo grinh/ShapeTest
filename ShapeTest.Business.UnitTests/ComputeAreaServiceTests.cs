@@ -43,7 +43,7 @@ namespace ShapeTest.Business.UnitTest
                     },
 				new Square
 					{
-						SideBase = 2
+						SideLength = 2
 					}
 			};
 
