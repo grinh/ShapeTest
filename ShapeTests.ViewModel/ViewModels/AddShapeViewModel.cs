@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 
@@ -16,8 +17,8 @@ namespace ShapeTests.ViewModel.ViewModels
 
         private int _OwnerId;
 
-        private IMvxCommand _AddShapeCommand;
-        private IMvxCommand _CancelCommand;
+        private ICommand _AddShapeCommand;
+        private ICommand _CancelCommand;
 
         public bool IsModal => true;
 
@@ -32,18 +33,17 @@ namespace ShapeTests.ViewModel.ViewModels
             set { SetAndRaisePropertyChanged(ref _OwnerId, value); }
         }
 
-        public IMvxCommand AddShapeCommand
+        public ICommand AddShapeCommand
         {
             get { return _AddShapeCommand; }
             set { SetAndRaisePropertyChanged(ref _AddShapeCommand, value);}
         }
 
-        public IMvxCommand CancelCommand
+        public ICommand CancelCommand
         {
             get { return _CancelCommand; }
             set { SetAndRaisePropertyChanged(ref _CancelCommand, value);}
         }
-
 
         public AddShapeViewModel(IShapesRepository shapeRepo)
         {
@@ -68,7 +68,7 @@ namespace ShapeTests.ViewModel.ViewModels
 			Close(this);
 		}
 
-        public void Cancel()
+        private void Cancel()
         {
             Close(this);
         }
