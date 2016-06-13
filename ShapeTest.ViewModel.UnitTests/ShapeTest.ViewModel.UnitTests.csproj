@@ -104,8 +104,6 @@
     <Compile Include="MvvmCrossTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapesViewModelTests.cs" />
-    <Compile Include="TriangleListViewModelTests.cs" />
-    <Compile Include="TriangleViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
