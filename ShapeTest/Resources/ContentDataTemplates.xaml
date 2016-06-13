@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:model="clr-namespace:ShapeTest.Business.Entities;assembly=ShapeTest.Business">
+    
+    <Thickness x:Key="EditTextMargin">8,0,0,8</Thickness>
 
     <DataTemplate x:Key ="ShapeListItemTemplate" DataType="{x:Type model:IShape}">
         <Grid>
@@ -23,10 +25,10 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Square Data Entry"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Name}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Side lenght:"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="SideLenghtEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideLength}"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="SideLenghtEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding SideLength}"/>
         </Grid>
     </DataTemplate>
 
@@ -46,13 +48,13 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Rectangle Data Entry"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Name}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Lenght:"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LenghtEntry" Width="120" Margin="4,0,4,0" Text="{Binding Length}"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LenghtEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Length}"/>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Width:"/>
-            <TextBox Grid.Row="3" Grid.Column="1"  x:Name="WidthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Width}"/>
+            <TextBox Grid.Row="3" Grid.Column="1"  x:Name="WidthEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Width}"/>
         </Grid>
     </DataTemplate>
 
@@ -71,10 +73,10 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Circle Data Entry"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Name}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Radius:"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="RadiusEntry" Width="120" Margin="4,0,4,0" Text="{Binding Radius}"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="RadiusEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Radius}"/>
 
         </Grid>
     </DataTemplate>
@@ -96,13 +98,13 @@
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Name}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Base:"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding Base}"/>
+            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Base}"/>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Height:"/>
-            <TextBox Grid.Row="3" Grid.Column="1"  x:Name="HeightEntry" Width="120" Margin="4,0,4,0" Text="{Binding Height}"/>
+            <TextBox Grid.Row="3" Grid.Column="1"  x:Name="HeightEntry" Width="120" Margin="{StaticResource EditTextMargin}" Text="{Binding Height}"/>
 
         </Grid>
     </DataTemplate>
