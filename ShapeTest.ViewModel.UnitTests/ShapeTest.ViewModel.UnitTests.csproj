@@ -99,6 +99,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AddShapeViewModelTests.cs" />
     <Compile Include="MockMvxViewDispatcher.cs" />
     <Compile Include="MvvmCrossTestSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
