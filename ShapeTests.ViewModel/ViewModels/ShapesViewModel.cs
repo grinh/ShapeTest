@@ -94,7 +94,7 @@ namespace ShapeTests.ViewModel
             AddShapeCommand = new MvxCommand(AddShape);
             RemoveShapeCommand = new MvxCommand(RemoveSelectedShape);
             ComputeAreaCommand = new MvxCommand(ComputeTotalArea);
-            SubmitAreaCommand = new MvxCommand(SubmitArea, CanSubmitArea);
+            SubmitAreaCommand = new MvxCommand(async () => await SubmitAreaAsync(), CanSubmitArea);
         }
 
 		/// <summary>
@@ -244,7 +244,7 @@ namespace ShapeTests.ViewModel
         /// <summary>
         /// Handler for SubmitAreaCommand. It will try to submit computed area.
         /// </summary>
-        private async void SubmitArea()
+        public async Task SubmitAreaAsync()
         {
 	        if (SubmissionInProgress)
 	        {
