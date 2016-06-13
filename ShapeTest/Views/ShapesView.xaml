@@ -66,8 +66,8 @@
             
             <controls:ProgressRingControl Grid.Column="2" Message="Sending data..." IsActive="{Binding SubmissionInProgress}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="4,0,0,4" />
 
-            <TextBlock Grid.Column="2" Text="Error! Data not submited!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}, ConverterParameter='invert'}" />
-            <TextBlock Grid.Column="2" Text="Data submited successfully!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="DarkGreen" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}}" />
+            <TextBlock Grid.Column="2" Text="Error! Data not submitted!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}, ConverterParameter='invert'}" />
+            <TextBlock Grid.Column="2" Text="Data submitted successfully!" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextAlignment="Center" Foreground="DarkGreen" Visibility="{Binding SubmissionResult, Converter={StaticResource SubmissionResultToVisibilityConverter}}" />
             
             <Button Margin="4"  Grid.Column="2" Grid.Row="1" Content="Submit Total Area" Command="{Binding SubmitAreaCommand}"/>
         </Grid>
